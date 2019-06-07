@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Feature Flags
+ * Plugin Name: WP Feature Flags
  * Plugin URI:  https://github.com/rdeeb/wp_feature_flags
- * Description: A feature solution for Wordpress Developers.
+ * Description: A feature flag solution for Wordpress Developers.
  * Version:     0.0.1
  * Author:      Ramy Deeb
  * Author URI:  https://ramydeeb.com/
@@ -11,3 +11,11 @@
  * Text Domain: wp_ff
  * Domain Path: /languages
  */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+define( "FF_PATH", plugin_dir_path( __FILE__ ) );
+
+require_once( FF_PATH . "includes/core/Singleton.php" );
+require_once( FF_PATH . "includes/core/FeatureFlag.php" );
+require_once( FF_PATH . "includes/core/FeatureFlags.php" );
+require_once( FF_PATH . "includes/helpers.php" );
