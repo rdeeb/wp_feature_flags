@@ -14,8 +14,14 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( "FF_PATH", plugin_dir_path( __FILE__ ) );
+define( "FF_URL", plugin_dir_url( __FILE__ ) );
+define( "FF_VERSION", "0.0.1");
 
 require_once( FF_PATH . "includes/core/Singleton.php" );
 require_once( FF_PATH . "includes/core/FeatureFlag.php" );
 require_once( FF_PATH . "includes/core/FeatureFlags.php" );
 require_once( FF_PATH . "includes/helpers.php" );
+
+if (is_admin()) {
+	require_once( FF_PATH . "includes/admin-page.php" );
+}

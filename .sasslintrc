@@ -1,0 +1,35 @@
+{
+  "options": {
+    "merge-default-rules": false,
+    "max-warnings": 50,
+    "cache-config": false
+  },
+  "files": {
+    "include": "**/*.s+(a|c)ss",
+    "ignore": [
+      "vendor/**/*.*",
+      "node_modules/**/*.*"
+    ]
+  },
+  "rules": {
+    "extends-before-mixins": 2,
+    "extends-before-declarations": 2,
+    "no-trailing-whitespace": 1,
+    "no-empty-rulesets": 2,
+    "no-vendor-prefixes": 2,
+    "attribute-quotes": 1,
+    "no-duplicate-properties": 2,
+    "quotes": [
+      1,
+      {
+        "style": "double"
+      }
+    ],
+    "property-sort-order": [
+      2,
+      {
+        "order": "alphabetical"
+      }
+    ]
+  }
+}

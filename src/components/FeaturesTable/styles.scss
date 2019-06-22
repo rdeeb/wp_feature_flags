@@ -1,0 +1,11 @@
+$actions_column_width: 200px;
+
+.wp-list-table.feature-flags {
+  .column-title {
+    width: calc(100% - #{$actions_column_width});
+  }
+
+  .column-actions {
+    width: 200px;
+  }
+}

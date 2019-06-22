@@ -77,7 +77,7 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 		 */
 		public function globalEnable()
 		{
-			$site_ff_string = get_blog_option( null, self::FF_SITE_OPTION_KEY, "" );
+			$site_ff_string = get_option( self::FF_SITE_OPTION_KEY, "" );
 
 			update_site_option( self::FF_SITE_OPTION_KEY, $this->addFeatureToString( $site_ff_string ) );
 		}
@@ -87,7 +87,7 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 		 */
 		public function globalDisable()
 		{
-			$site_ff_string = get_blog_option( null, self::FF_SITE_OPTION_KEY, "" );
+			$site_ff_string = get_option( self::FF_SITE_OPTION_KEY, "" );
 
 			update_site_option( self::FF_SITE_OPTION_KEY, $this->removeFeatureFromString( $site_ff_string ) );
 		}
@@ -104,7 +104,7 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 			if ( $user_id !== 0 && ! $this->userIdExists( $user_id ) ) throw new Exception( "User with id '${user_id}' not found." );
 
 			// First we verify if the feature flag is enabled site wide?
-			$site_ff_string = get_blog_option( null, self::FF_SITE_OPTION_KEY, "" );
+			$site_ff_string = get_option( self::FF_SITE_OPTION_KEY, "" );
 			if ( strpos( $site_ff_string, $this->feature ) !== false ) return true;
 
 			// Then we verify the user group to check if the user group has the option active
@@ -118,6 +118,18 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 			return false;
 		}
 
+		public function toObject() {
+			return (object) [
+				"name" => $this->feature
+			];
+		}
+
+		/**
+		 * Checks if a user exists
+		 *
+		 * @param int $user_id User ID to check if exists
+		 * @return bool
+		 */
 		protected function userIdExists( $user_id )
 		{
 			if ( $user_id instanceof WP_User ) {
@@ -127,6 +139,12 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 			return (bool)get_user_by( 'id', $user_id );
 		}
 
+		/**
+		 * Adds the current feature to a string
+		 *
+		 * @param string $string
+		 * @return string
+		 */
 		protected function addFeatureToString( $string )
 		{
 			if ( $string === "" ) {
@@ -140,6 +158,12 @@ if ( ! class_exists( 'ff_FeatureFlag' ) ) {
 			return $string;
 		}
 
+		/**
+		 * Removes the current feature from a string
+		 *
+		 * @param string $string
+		 * @return string
+		 */
 		protected function removeFeatureFromString( $string )
 		{
 			if ( $string === $this->feature ) {
